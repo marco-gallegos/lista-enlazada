@@ -18,7 +18,16 @@ public:
 
     friend class Lista<DATO>;
 
+
 };
+
+template<class DATO> ostream &operator <<(ostream &out,const Nodo<DATO> &a_mostrar)
+{
+    out<<a_mostrar.valor;
+    return out;
+}
+
+
 
 template<class DATO> class Lista
 {
@@ -30,9 +39,29 @@ public:
     void insertar(DATO a_insertar);
     void eliminar(DATO a_borrar);
     //regresara el dato que busca
-    DATO buscar(dato &a_buscar);
+    DATO buscar(DATO &a_buscar);
     void ultimo();
     void mostrar();
+};
+
+template<class DATO> void Lista<DATO>::insertar(DATO a_insertar)
+{
+    if(this->head == NULL)
+    {
+        head = new Nodo<DATO>(a_insertar);
+        return;
+    }
+
+    Nodo<DATO> *iterador= this->head;
+
+    while(iterador->siguiente != NULL)
+    {
+        iterador = iterador->siguiente;
+    }
+    iterador->siguiente = new Nodo<DATO>(a_insertar,iterador);
+    return;
+
+}
 
 #endif // LISTA
 
