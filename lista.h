@@ -33,15 +33,21 @@ template<class DATO> class Lista
 {
 public:
     Nodo<DATO> *head;
+    //
+    Nodo<DATO> *it;
 
-    Lista():head(NULL){}
+    Lista():head(NULL),it(NULL){}
 
     void insertar(DATO a_insertar);
-    void eliminar(DATO a_borrar);
+    bool eliminar(DATO a_borrar);
+    bool eliminar(int pos);
     //regresara el dato que busca
     DATO buscar(DATO &a_buscar);
     void ultimo();
     void mostrar();
+
+    void iterar();
+
 };
 
 template<class DATO> void Lista<DATO>::insertar(DATO a_insertar)
@@ -60,6 +66,45 @@ template<class DATO> void Lista<DATO>::insertar(DATO a_insertar)
     }
     iterador->siguiente = new Nodo<DATO>(a_insertar,iterador);
     return;
+
+}
+
+template<class DATO> bool Lista<DATO>::eliminar(DATO a_borrar)
+{
+    Nodo<DATO> *iterador= this->head;
+    Nodo<DATO> *anterior = NULL;
+    if(a_borrar == this->head->valor)
+    {
+        this->head=this->head->siguiente;
+        this->head->anterior = NULL;
+        delete iterador;
+
+        return true;
+    }
+    while(iterador->valor != a_borrar)
+    {
+        anterior = iterador;
+        iterador= iterador->siguiente;
+    }
+    if(iterador->valor != a_borrar)
+    {
+        return false;
+    }
+    if(iterador->siguiente == NULL)
+    {
+        anterior->siguiente = NULL;
+        delete iterador;
+        return true;
+    }
+
+    iterador->siguiente->anterior = anterior;
+    anterior->siguiente = iterador->siguiente;
+    delete iterador;
+    return true;
+}
+
+template<class DATO> Lista<DATO>::iterar()
+{
 
 }
 
