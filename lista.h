@@ -103,9 +103,44 @@ template<class DATO> bool Lista<DATO>::eliminar(DATO a_borrar)
     return true;
 }
 
-template<class DATO> Lista<DATO>::iterar()
+template<class DATO> void Lista<DATO>::iterar()
 {
+    if(this->it == NULL)
+    {
+        this->it = this->head;
+    }
+    int opc = 0;
+    while(opc != 6)
+    {
+        cout<<"1 izquieda  2 derecha 6 salir"<<endl;
+        cout<<this->it->valor<<endl;
+        cin>>opc;cin.ignore();
+        switch (opc) {
+        case 1:
+            if(it->anterior == NULL)
+            {
+                cout<<"no hay"<<endl;
+            }
+            else
+            {
+                it=it->anterior;
+            }
+            break;
+        case 2:
+            if(it->siguiente == NULL)
+            {
+                cout<<"no hay"<<endl;
+            }
+            else
+            {
+                it=it->siguiente;
+            }
+            break;
+        default:
 
+            break;
+        }
+    }
 }
 
 #endif // LISTA

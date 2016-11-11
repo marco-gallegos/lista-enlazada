@@ -1,10 +1,14 @@
 #include <QCoreApplication>
 #include "lista.h"
 
-int main(int argc, char *argv[])
+int main()
 {
     //QCoreApplication a(argc, argv);
-    Nodo<int> *n = new Nodo<int>(2);
+    Lista<string> mi_lista;
+    mi_lista.insertar("hola");
+    mi_lista.insertar("hola2");
+    mi_lista.insertar("hola3");
+    mi_lista.iterar();
     //return a.exec();
 }
 
