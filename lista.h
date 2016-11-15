@@ -62,9 +62,10 @@ template<class DATO> int Lista<DATO>::tamano()
     Nodo<DATO> *it = this->head;
     while (it->siguiente != NULL)
     {
-        cotador ++;
+        contador ++;
         it = it->siguiente;
     }
+    return contador;
 }
 
 template<class DATO> void Lista<DATO>::insertar(DATO a_insertar)
