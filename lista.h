@@ -39,13 +39,15 @@ public:
     Lista():head(NULL),it(NULL){}
 
     void insertar(DATO a_insertar);
-    //eliminar el elemnto del tipo "class Dato" que le pases a la funcion
+    //elimina el elemnto del tipo "class Dato" que le pases a la funcion
     bool eliminar(DATO a_borrar);
-    //eliminar el dato en la posicion pos 1 a N
+    //elimina el dato en la posicion pos 1 a N
     bool eliminar(unsigned int pos);
+    //elimina el dato al final de la lista
+    bool eliminar();
     //regresara el dato que busca
     DATO buscar(DATO &a_buscar);
-    void ultimo();
+
     void mostrar();
     int tamano();
     void iterar();
@@ -132,6 +134,14 @@ template<class DATO> bool Lista<DATO>::eliminar(unsigned int pos)
     //validar pos
     Nodo<DATO> *iterador= this->head;
     Nodo<DATO> *anterior = NULL;
+    if(pos == 1)
+    {
+        this->head=this->head->siguiente;
+        this->head->anterior = NULL;
+        delete iterador;
+
+        return true;
+    }
     int contador = 1;
     //buscar posicion
     while(contador < pos && iterador->siguiente != NULL)
@@ -140,6 +150,12 @@ template<class DATO> bool Lista<DATO>::eliminar(unsigned int pos)
         iterador = iterador->siguiente;
         contador ++;
     }
+    if(iterador->siguiente == NULL)
+    {
+        anterior->siguiente = NULL;
+        delete iterador;
+        return true;
+    }
 
     //el apuntador del nodo siguiente que lleva hacia iterador ahora apuntara hacia anterior
     iterador->siguiente->anterior = anterior;
@@ -147,6 +163,26 @@ template<class DATO> bool Lista<DATO>::eliminar(unsigned int pos)
     anterior->siguiente = iterador->siguiente;
     delete iterador;
     return true;
+
+}
+
+template<class DATO> bool Lista<DATO>::eliminar()
+{
+    if(this->head == NULL)
+    {
+        return false;
+    }
+    Nodo<DATO> *iterador= this->head;
+    Nodo<DATO> *anterior = NULL;
+    while(iterador->siguiente != NULL)
+    {
+        anterior = iterador;
+        iterador = iterador->siguiente;
+    }
+    anterior->siguiente = NULL;
+    delete iterador;
+    return true;
+
 
 }
 
@@ -188,6 +224,21 @@ template<class DATO> void Lista<DATO>::iterar()
             break;
         }
     }
+}
+
+template<class DATO> void Lista<DATO>::mostrar()
+{
+    if(this->head == NULL)
+    {
+        return;
+    }
+    Nodo<DATO> *iterador= this->head;
+    do
+    {
+        cout<<iterador->valor<<" ";
+        iterador=iterador->siguiente;
+    }while(iterador!= NULL);
+    cout<<endl;
 }
 
 
