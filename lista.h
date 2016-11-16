@@ -91,6 +91,12 @@ template<class DATO> void Lista<DATO>::insertar(DATO a_insertar)
 
 template<class DATO> bool Lista<DATO>::eliminar(DATO a_borrar)
 {
+    if(this->head->valor == a_borrar)
+    {
+        delete this->head;
+        this->head = NULL;
+        return true;
+    }
     Nodo<DATO> *iterador= this->head;
     Nodo<DATO> *anterior = NULL;
     if(a_borrar == this->head->valor)
@@ -101,7 +107,7 @@ template<class DATO> bool Lista<DATO>::eliminar(DATO a_borrar)
 
         return true;
     }
-    while(iterador->valor != a_borrar)
+    while(iterador->valor != a_borrar && iterador->siguiente != NULL)
     {
         anterior = iterador;
         iterador= iterador->siguiente;
@@ -127,16 +133,23 @@ template<class DATO> bool Lista<DATO>::eliminar(DATO a_borrar)
 template<class DATO> bool Lista<DATO>::eliminar(unsigned int pos)
 {
     int *tam = new int(this->tamano());
-    if(pos > *tam || *tam == 0 )
+    //validar pos
+    if(pos > *tam || *tam == 0 || pos < 1 )
     {
         return false;
     }
-    //validar pos
+    if(pos == 1 && this->head->siguiente == NULL)
+    {
+        delete this->head;
+        this->head = NULL;
+
+        return true;
+    }
     Nodo<DATO> *iterador= this->head;
     Nodo<DATO> *anterior = NULL;
-    if(pos == 1)
+    if(pos == 1 && this->head->siguiente != NULL)
     {
-        this->head=this->head->siguiente;
+        this->head = this->head->siguiente;
         this->head->anterior = NULL;
         delete iterador;
 
@@ -171,6 +184,12 @@ template<class DATO> bool Lista<DATO>::eliminar()
     if(this->head == NULL)
     {
         return false;
+    }
+    if(this->head->siguiente == NULL)
+    {
+        delete head;
+        head= NULL;
+        return true;
     }
     Nodo<DATO> *iterador= this->head;
     Nodo<DATO> *anterior = NULL;

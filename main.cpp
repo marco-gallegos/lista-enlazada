@@ -6,14 +6,14 @@ int main()
     //QCoreApplication a(argc, argv);
     Lista<string> mi_lista;
     mi_lista.insertar("hola");
-    mi_lista.insertar("hola2");
-    mi_lista.insertar("hola3");
+    //mi_lista.insertar("hola2");
+    //mi_lista.insertar("hola3");
     int opc = 1, pos_eliminar;
     string para_insertar;
     string para_eliminar;
     while(opc != 6)
     {
-        cout<<"1 - insertar 2 - eliminar 3 - ver 4 - iterar "<<endl;
+        cout<<"1 - insertar 2 - eliminar 3 - ver 4 - iterar 6 - salir "<<endl;
         cin>>opc;cin.ignore();
         switch (opc) {
         case 1:
@@ -21,9 +21,8 @@ int main()
             mi_lista.insertar(para_insertar);
             break;
         case 2:
-            while(opc != 5)
-            {
-                cout<<"1 - por un dato igual 2 - por posicion 3 - el ultimo en la lista";
+
+                cout<<"1 - por un dato igual 2 - por posicion 3 - el ultimo en la lista "<<endl;
                 cin>>opc;cin.ignore();
                 switch (opc) {
                 case 1 :
@@ -40,7 +39,7 @@ int main()
                 default:
                     break;
                 }
-            }
+
             break;
         case 3:
             mi_lista.mostrar();
