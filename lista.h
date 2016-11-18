@@ -12,6 +12,7 @@ public:
     //constructor sobrecargado no permite construir sin pasarle dat
     Nodo(DATO dat,Nodo<DATO> * ant=NULL, Nodo<DATO> * sig = NULL):valor(dat),anterior(ant),
         siguiente(sig) { }
+    ~Nodo(){}
 
     DATO valor;
     Nodo<DATO> *anterior,*siguiente;
@@ -37,6 +38,7 @@ public:
     Nodo<DATO> *it;
 
     Lista():head(NULL),it(NULL){}
+    ~Lista(){}
 
     void insertar(DATO a_insertar);
     //elimina el elemnto del tipo "class Dato" que le pases a la funcion
@@ -132,7 +134,7 @@ template<class DATO> bool Lista<DATO>::eliminar(DATO a_borrar)
 
 template<class DATO> bool Lista<DATO>::eliminar(unsigned int pos)
 {
-    int *tam = new int(this->tamano());
+    unsigned int *tam = new unsigned int(this->tamano());
     //validar pos
     if(pos > *tam || *tam == 0 || pos < 1 )
     {
@@ -155,7 +157,7 @@ template<class DATO> bool Lista<DATO>::eliminar(unsigned int pos)
 
         return true;
     }
-    int contador = 1;
+    unsigned int contador = 1;
     //buscar posicion
     while(contador < pos && iterador->siguiente != NULL)
     {
